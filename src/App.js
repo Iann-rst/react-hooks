@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [repositorio, setRepositorio] = useState([
+    { id:1, name: 'repo-1'},
+    { id:2, name: 'repo-2'},
+    { id:3, name: 'repo-3'},
+  ]);
+
+  function handleAddRepository(){
+    setRepositorio([
+      ...repositorio,
+      {id: Math.random(), name: "Novo repo"}
+    ]);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <> 
+      <ul>
+        {repositorio.map(repo => (
+          <li key = {repo.id}>{repo.name}</li>
+        ))}
+      </ul>
+      <button onClick={handleAddRepository}>Adicionar Repositório</button>
+    </>
   );
 }
 
